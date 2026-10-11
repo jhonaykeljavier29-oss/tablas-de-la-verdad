@@ -1,0 +1,263 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.5rem 1.6rem;
+  backdrop-filter: blur(6px);
+}
+
+/* ------------------------------- Empty ------------------------------- */
+.empty-card {
+  text-align: center;
+  padding: 3rem 1.75rem;
+}
+
+.empty-card h1 {
+  margin-top: 0;
+}
+
+.empty-card p {
+  color: var(--text-dim);
+}
+
+.empty-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+/* ------------------------------ Secure ------------------------------- */
+.secure-card {
+  text-align: center;
+  padding: 2.25rem 1.75rem;
+  border: 1px dashed rgba(244, 114, 182, 0.5);
+  background: rgba(244, 114, 182, 0.05);
+  transition: all 0.3s ease;
+}
+
+.secure-card.unlocked {
+  border-style: solid;
+  border-color: rgba(52, 211, 153, 0.5);
+  background: rgba(52, 211, 153, 0.06);
+}
+
+.lock-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.secure-card h1 {
+  margin: 0.6rem 0;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  background: linear-gradient(135deg, #f472b6, #a78bfa, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.secure-text {
+  max-width: 620px;
+  margin: 0 auto 1.5rem;
+  color: var(--text-dim);
+}
+
+.secure-text strong {
+  color: var(--text);
+}
+
+.download-actions {
+  display: flex;
+  gap: 0.65rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hint {
+  margin: 1rem 0 0;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+/* -------------------------------- KPIs ------------------------------- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.85rem;
+}
+
+.kpi {
+  text-align: center;
+  padding: 1.1rem 0.75rem;
+}
+
+.kpi b {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.kpi span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-dim);
+}
+
+.kpi-ok b {
+  color: #34d399;
+}
+
+.kpi-bad b {
+  color: #fb7185;
+}
+
+.kpi-skip b {
+  color: #fbbf24;
+}
+
+.nota-alta {
+  border-color: rgba(52, 211, 153, 0.5);
+}
+.nota-alta b {
+  color: #34d399;
+}
+
+.nota-media {
+  border-color: rgba(251, 191, 36, 0.5);
+}
+.nota-media b {
+  color: #fbbf24;
+}
+
+.nota-baja {
+  border-color: rgba(251, 113, 133, 0.5);
+}
+.nota-baja b {
+  color: #fb7185;
+}
+
+/* ------------------------------ Verdict ------------------------------ */
+.verdict {
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.verdict.pass {
+  background: rgba(52, 211, 153, 0.12);
+  border-color: rgba(52, 211, 153, 0.45);
+  color: #a7f3d0;
+}
+
+.verdict.fail {
+  background: rgba(251, 113, 133, 0.12);
+  border-color: rgba(251, 113, 133, 0.45);
+  color: #fecdd3;
+}
+
+/* ----------------------------- Breakdown ----------------------------- */
+.breakdown h2 {
+  margin-top: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.row {
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  background: var(--surface-2);
+}
+
+.row.ok {
+  border-left-color: #34d399;
+}
+
+.row.bad {
+  border-left-color: #fb7185;
+}
+
+.row.skip {
+  border-left-color: #fbbf24;
+}
+
+.row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.row-num {
+  width: 1.7rem;
+  height: 1.7rem;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.row-formula {
+  font-family: var(--font-mono, monospace);
+  font-weight: 800;
+  color: #a5f3fc;
+}
+
+.row-status {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.row.ok .row-status {
+  color: #34d399;
+}
+
+.row.bad .row-status {
+  color: #fb7185;
+}
+
+.row.skip .row-status {
+  color: #fbbf24;
+}
+
+.row-body {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+}
+
+.row-body b {
+  color: var(--text);
+}
+
+/* --------------------------- Footer actions -------------------------- */
+.footer-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 0.5rem;
+}

@@ -1,0 +1,19 @@
+<nav class="guide-tabs" aria-label="Unidades">
+  @for (u of unidades; track u.id) {
+    <button
+      class="guide-tab"
+      [class.active]="activa() === u.id"
+      [style.--tab-color]="u.color"
+      (click)="cambiar(u.id)"
+    >
+      <span>{{ u.icono }}</span> Unidad {{ u.id }}
+    </button>
+  }
+</nav>
+
+@switch (activa()) {
+  @case (1) { <app-unit-fundamentos /> }
+  @case (2) { <app-unit-proposicional /> }
+  @case (3) { <app-unit-categorica /> }
+  @case (4) { <app-unit-ingenieria /> }
+}

@@ -1,0 +1,353 @@
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.25rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lab-hero {
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.16);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  color: #a5f3fc;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.lab-hero h1 {
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  margin: 0.9rem auto 0.6rem;
+  max-width: 800px;
+  background: linear-gradient(135deg, #a78bfa, #22d3ee, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lead {
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+}
+
+.howto {
+  padding: 1.5rem 1.6rem;
+}
+
+.howto h2 {
+  margin: 0 0 0.7rem;
+  font-size: 1.2rem;
+}
+
+.howto ol {
+  margin: 0;
+  padding-left: 1.3rem;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.howto strong {
+  color: var(--text);
+}
+
+/* ------------------------------ Editor ------------------------------ */
+.editor {
+  padding: 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.editor-label {
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+.formula-input {
+  width: 100%;
+  font-family: var(--font-mono, monospace);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #a5f3fc;
+  background: rgba(0, 0, 0, 0.28);
+  border: 2px solid rgba(34, 211, 238, 0.35);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.formula-input:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.16);
+}
+
+.formula-input::placeholder {
+  color: rgba(168, 159, 200, 0.6);
+  font-weight: 500;
+}
+
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.key {
+  min-width: 2.8rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  transition: transform 0.1s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.key:hover {
+  background: var(--surface-hover);
+  border-color: rgba(139, 92, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+.key:active {
+  transform: translateY(0);
+}
+
+.key-op {
+  color: #f472b6;
+  border-color: rgba(244, 114, 182, 0.35);
+}
+
+.key-paren {
+  color: #a5f3fc;
+}
+
+.key-accion {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.ejemplos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.ejemplos-label {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.chip-ejemplo {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.chip-ejemplo:hover {
+  color: #fff;
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.16);
+}
+
+/* ------------------------------ Error ------------------------------- */
+.error-card {
+  padding: 1.4rem 1.6rem;
+  border-left: 5px solid var(--red);
+  background: rgba(251, 113, 133, 0.08);
+}
+
+.error-card h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+  color: var(--red);
+}
+
+.error-card p {
+  margin: 0.3rem 0;
+  color: var(--text-dim);
+}
+
+.error-hint {
+  font-size: 0.9rem;
+}
+
+/* ---------------------------- Resultado ----------------------------- */
+.result-card {
+  padding: 1.5rem 1.6rem;
+}
+
+.result-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.result-head h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.filas-info {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.lab-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+
+.lab-table th,
+.lab-table td {
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.lab-table thead th {
+  background: rgba(255, 255, 255, 0.06);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.lab-table .col-var {
+  background: rgba(139, 92, 246, 0.1);
+  font-weight: 700;
+}
+
+.lab-table .col-final {
+  background: rgba(34, 211, 238, 0.12);
+  border-left: 2px solid rgba(34, 211, 238, 0.5);
+  border-right: 2px solid rgba(34, 211, 238, 0.5);
+}
+
+.lab-table thead th.col-final {
+  background: rgba(34, 211, 238, 0.2);
+  color: #a5f3fc;
+}
+
+.lab-table td.col-final {
+  font-size: 1.05rem;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.dot.val-v {
+  background: rgba(52, 211, 153, 0.16);
+}
+
+.dot.val-f {
+  background: rgba(251, 113, 133, 0.16);
+}
+
+.dot-final {
+  background: rgba(34, 211, 238, 0.2);
+}
+
+/* --------------------------- Clasificación -------------------------- */
+.clasif-card {
+  padding: 1.3rem 1.6rem;
+  border-left: 5px solid var(--cyan);
+}
+
+.clasif-card h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+}
+
+.clasif-card p {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+.clasif-tautologia {
+  border-left-color: var(--green);
+  background: rgba(52, 211, 153, 0.08);
+}
+
+.clasif-tautologia h2 {
+  color: var(--green);
+}
+
+.clasif-contradiccion {
+  border-left-color: var(--red);
+  background: rgba(251, 113, 133, 0.08);
+}
+
+.clasif-contradiccion h2 {
+  color: var(--red);
+}
+
+.clasif-contingencia {
+  border-left-color: var(--cyan);
+  background: rgba(34, 211, 238, 0.08);
+}
+
+.clasif-contingencia h2 {
+  color: var(--cyan);
+}

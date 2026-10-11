@@ -1,0 +1,97 @@
+<section class="unit-content" style="--unit-color: #34d399">
+  <header class="unit-hero">
+    <span class="unit-badge">Unidad IV</span>
+    <h1>Aplicación de la Lógica en la Ingeniería</h1>
+    <p>
+      La lógica no es un ejercicio abstracto: es la herramienta que convierte la intuición en
+      <strong>decisiones demostrables</strong>, modela sistemas complejos y protege la calidad y
+      la seguridad de los proyectos.
+    </p>
+  </header>
+
+  <article class="u-section">
+    <h2>1. Resolución de problemas técnicos</h2>
+    <p>
+      Sustituye la intuición empírica por <strong>premisas sólidamente demostrables</strong> y
+      modelos estructurados libres de ambigüedad. Antes de actuar, se formula el problema como un
+      conjunto de proposiciones y se razona sobre ellas.
+    </p>
+    <ul class="kv-list">
+      <li>Identificar y formular el problema con precisión.</li>
+      <li>Establecer premisas verificables (mediciones, especificaciones, normas).</li>
+      <li>Deducir consecuencias y validarlas antes de implementar.</li>
+    </ul>
+  </article>
+
+  <article class="u-section">
+    <h2>2. Modelado lógico y sistemas complejos</h2>
+    <p>Herramientas lógicas habituales en ingeniería:</p>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Matrices de decisión</h4>
+        <p>Comparan alternativas frente a criterios ponderados.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Árboles de decisión</h4>
+        <p>Modelan consecuencias ramificadas de cada elección.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Tablas de verdad</h4>
+        <p>Definen el comportamiento de sistemas de control automatizado.</p>
+      </div>
+    </div>
+
+    <h3>Compuertas lógicas y control automatizado</h3>
+    <p>
+      Las conectivas proposicionales se materializan en <strong>compuertas lógicas</strong> usadas
+      en PLC, circuitos digitales y sistemas mecatrónicos:
+    </p>
+    <table class="table-simple">
+      <thead><tr><th>Conectiva</th><th>Compuerta</th><th>Salida = V (1)</th></tr></thead>
+      <tbody>
+        <tr><td>Conjunción ∧</td><td>AND</td><td>Sólo si todas las entradas son 1</td></tr>
+        <tr><td>Disyunción ∨</td><td>OR</td><td>Si al menos una entrada es 1</td></tr>
+        <tr><td>Negación ¬</td><td>NOT</td><td>Invierte la entrada</td></tr>
+        <tr><td>Bicondicional ↔</td><td>XNOR</td><td>Si las entradas son iguales</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Ejemplo: enclavamiento de seguridad de una máquina</h3>
+    <p>
+      La máquina arranca si <code>guardia_cerrada ∧ boton_pulsado ∧ ¬paro_emergencia</code>.
+      Basta que falte una condición para impedir el arranque: la tabla de verdad garantiza
+      que no haya estados peligrosos sin contemplar.
+    </p>
+    <div class="callout tip">
+      Modelar con lógica <strong>garantiza consistencia estructural</strong> y evita fallos de
+      implementación antes de construir el sistema físico.
+    </div>
+  </article>
+
+  <article class="u-section">
+    <h2>3. Ética y toma de decisiones</h2>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Pensamiento crítico</h4>
+        <p>Cuestionar supuestos y evitar sesgos cognitivos.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Rechazo de falacias</h4>
+        <p>No aceptar propuestas técnicas sostenidas por razonamientos inválidos.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Seguridad y sostenibilidad</h4>
+        <p>Decidir con responsabilidad profesional y visión de largo plazo.</p>
+      </div>
+    </div>
+    <div class="callout warn">
+      Un buen ingeniero no sólo calcula: <strong>argumenta</strong>. La lógica es el lenguaje de
+      una ingeniería responsable.
+    </div>
+  </article>
+
+  <div class="cta-row">
+    <a routerLink="/examen" class="btn btn-primary">¡Estoy lista, hacer el examen!</a>
+    <a routerLink="/unidad/1" class="btn btn-ghost">Repasar desde la Unidad I</a>
+  </div>
+</section>

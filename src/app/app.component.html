@@ -1,0 +1,21 @@
+<header class="topbar">
+  <a class="brand" routerLink="/">
+    <span class="brand-symbol">⊨</span>
+    <span class="brand-text">Tablas<span class="brand-accent">deVerdad</span></span>
+  </a>
+  <nav class="nav">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+    <a routerLink="/unidad/1" routerLinkActive="active">Guía</a>
+    <a routerLink="/laboratorio" routerLinkActive="active">Laboratorio</a>
+    <a routerLink="/examen" routerLinkActive="active">Examen</a>
+    <a routerLink="/resultado" routerLinkActive="active">Resultados</a>
+  </nav>
+</header>
+
+<main class="content">
+  <router-outlet />
+</main>
+
+<footer class="footer">
+  <p>Hecho con 💜 para aprender lógica proposicional · {{ anio }}</p>
+</footer>

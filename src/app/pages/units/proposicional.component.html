@@ -1,0 +1,182 @@
+<section class="unit-content" style="--unit-color: #8b5cf6">
+  <header class="unit-hero">
+    <span class="unit-badge">Unidad II</span>
+    <h1>Lógica Proposicional</h1>
+    <p>
+      Las <strong>conectivas lógicas</strong> unen proposiciones simples y su valor de verdad
+      depende de sus componentes. Aquí aprendes las tablas de verdad, las reglas de inferencia
+      y los métodos de prueba de validez.
+    </p>
+  </header>
+
+  <!-- Conectivas -->
+  <article class="u-section">
+    <h2>1. Conectivas lógicas</h2>
+    <div class="grid-cards">
+      @for (op of operadores; track op.simbolo) {
+        <div class="mini-card" [style.border-top]="'4px solid ' + op.color">
+          <h4>{{ op.simbolo }} {{ op.nombre }} <small>({{ op.enIngles }})</small></h4>
+          <p>{{ op.descripcion }}</p>
+          <code>{{ op.regla }}</code>
+        </div>
+      }
+    </div>
+    <div class="callout">
+      Para agrupar fórmulas complejas se usan paréntesis <code>()</code>, corchetes <code>[]</code>
+      y llaves <code>&#123; &#125;</code>. La <strong>conectiva principal</strong> es el operador de mayor
+      jerarquía que gobierna toda la expresión. Orden de prioridad:
+      <code>¬</code> &gt; <code>∧</code> &gt; <code>∨</code> &gt; <code>→</code> &gt; <code>↔</code>.
+    </div>
+  </article>
+
+  <!-- Tablas de verdad -->
+  <article class="u-section">
+    <h2>2. Tabla de verdad y su construcción</h2>
+    <p>
+      El número de filas se calcula con <strong>2ⁿ</strong>, donde <em>n</em> es el número de
+      variables proposicionales. Se enumeran todas las combinaciones (empezando por V).
+    </p>
+
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Conjunción p ∧ q</h4>
+        <table class="table-simple">
+          <thead><tr><th>p</th><th>q</th><th>p ∧ q</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td class="val-v">V</td></tr>
+            <tr><td>V</td><td>F</td><td class="val-f">F</td></tr>
+            <tr><td>F</td><td>V</td><td class="val-f">F</td></tr>
+            <tr><td>F</td><td>F</td><td class="val-f">F</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mini-card">
+        <h4>Disyunción p ∨ q</h4>
+        <table class="table-simple">
+          <thead><tr><th>p</th><th>q</th><th>p ∨ q</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td class="val-v">V</td></tr>
+            <tr><td>V</td><td>F</td><td class="val-v">V</td></tr>
+            <tr><td>F</td><td>V</td><td class="val-v">V</td></tr>
+            <tr><td>F</td><td>F</td><td class="val-f">F</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mini-card">
+        <h4>Condicional p → q</h4>
+        <table class="table-simple">
+          <thead><tr><th>p</th><th>q</th><th>p → q</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td class="val-v">V</td></tr>
+            <tr><td>V</td><td>F</td><td class="val-f">F</td></tr>
+            <tr><td>F</td><td>V</td><td class="val-v">V</td></tr>
+            <tr><td>F</td><td>F</td><td class="val-v">V</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mini-card">
+        <h4>Bicondicional p ↔ q</h4>
+        <table class="table-simple">
+          <thead><tr><th>p</th><th>q</th><th>p ↔ q</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td class="val-v">V</td></tr>
+            <tr><td>V</td><td>F</td><td class="val-f">F</td></tr>
+            <tr><td>F</td><td>V</td><td class="val-f">F</td></tr>
+            <tr><td>F</td><td>F</td><td class="val-v">V</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>Tipos de resultado</h3>
+    <div class="grid-cards">
+      @for (t of tiposResultado; track t.nombre) {
+        <div class="mini-card">
+          <h4>{{ t.nombre }}</h4>
+          <p>{{ t.desc }}</p>
+          <code>{{ t.forma }}</code>
+        </div>
+      }
+    </div>
+  </article>
+
+  <!-- Ejemplos resueltos -->
+  <article class="u-section">
+    <h2>3. Ejemplos resueltos paso a paso</h2>
+    @for (ej of ejemplos; track ej.formula) {
+      <h3>{{ ej.titulo }}</h3>
+      <div class="formula-block">{{ ej.formula }}</div>
+      <ul class="kv-list">
+        @for (paso of ej.pasos; track paso) { <li>{{ paso }}</li> }
+      </ul>
+      <table class="table-simple">
+        <thead>
+          <tr>
+            @for (v of ej.variables; track v) { <th>{{ v }}</th> }
+            <th>{{ ej.formula }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (fila of ej.rows; track $index) {
+            <tr>
+              @for (val of fila.asignacion; track $index) { <td>{{ vf(val) }}</td> }
+              <td [class.val-v]="fila.valor" [class.val-f]="!fila.valor">{{ vf(fila.valor) }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <div class="callout tip">{{ ej.nota }}</div>
+    }
+  </article>
+
+  <!-- Reglas de inferencia -->
+  <article class="u-section">
+    <h2>4. Formas argumentales válidas (reglas de inferencia)</h2>
+    <p>
+      Una <strong>regla de inferencia</strong> es un patrón válido que nos permite pasar de
+      premisas a una conclusión de forma segura.
+    </p>
+    <div class="grid-cards">
+      @for (r of reglas; track r.nombre) {
+        <div class="mini-card" [style.border-left]="'4px solid ' + r.color">
+          <h4>{{ r.nombre }}</h4>
+          <div class="chips">
+            @for (p of r.forma; track p) { <span class="chip">{{ p }}</span> }
+            <span class="chip">∴ {{ r.conclusion }}</span>
+          </div>
+          <p>{{ r.ejemplo }}</p>
+        </div>
+      }
+    </div>
+  </article>
+
+  <!-- Métodos de prueba -->
+  <article class="u-section">
+    <h2>5. Métodos de prueba de validez</h2>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Tablas de verdad completas</h4>
+        <p>
+          Un argumento es válido si <strong>no existe ninguna fila</strong> en la que todas las
+          premisas sean verdaderas y la conclusión sea falsa.
+        </p>
+      </div>
+      <div class="mini-card">
+        <h4>Deducción natural</h4>
+        <p>
+          Se aplican las reglas de inferencia paso a paso para derivar la conclusión a partir de
+          las premisas, sin recorrer todas las combinaciones.
+        </p>
+      </div>
+    </div>
+    <div class="callout warn">
+      Cuidado con las <strong>falacias formales</strong>: afirmar el consecuente (p→q, q ⊢ p) y
+      negar el antecedente (p→q, ¬p ⊢ ¬q) <strong>no son válidas</strong>.
+    </div>
+  </article>
+
+  <div class="cta-row">
+    <a routerLink="/examen" class="btn btn-primary">Practicar con tablas y reglas</a>
+    <a routerLink="/unidad/3" class="btn btn-ghost">Ir a la Unidad III →</a>
+  </div>
+</section>

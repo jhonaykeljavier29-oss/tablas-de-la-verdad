@@ -1,0 +1,107 @@
+<section class="page">
+  @if (!resultado()) {
+    <!-- Sin examen realizado -->
+    <div class="card empty-card">
+      <h1>Aún no hay resultados</h1>
+      <p>Necesitas realizar un examen para poder generar y descargar tu reporte.</p>
+      <div class="empty-actions">
+        <a routerLink="/examen" class="btn btn-primary">Iniciar un examen</a>
+        <a routerLink="/" class="btn btn-ghost">Repasar la teoría</a>
+      </div>
+    </div>
+  } @else {
+    <!-- ------------------------- Panel seguro ------------------------- -->
+    <div class="card secure-card" [class.unlocked]="revelado()">
+      <div class="lock-icon">{{ revelado() ? '🔓' : '🔒' }}</div>
+      <h1>{{ revelado() ? 'Resultados desbloqueados' : 'Examen finalizado' }}</h1>
+      <p class="secure-text">
+        @if (!revelado()) {
+          Tus respuestas fueron procesadas de forma segura. Para evitar trampas,
+          la nota <strong>no se muestra directamente</strong>. Descarga tu reporte
+          para consultar la calificación y el desglose completo.
+        } @else {
+          Reporte generado correctamente. Revísalo con calma o envíalo. Abajo
+          tienes la síntesis de tu desempeño.
+        }
+      </p>
+
+      <div class="download-actions">
+        <button class="btn btn-primary" (click)="descargarTodo()">
+          ⬇ Descargar Resultados
+        </button>
+        <button class="btn btn-ghost" (click)="descargarTXT()">Reporte .TXT</button>
+        <button class="btn btn-ghost" (click)="descargarJSON()">Reporte .JSON</button>
+        <button class="btn btn-ghost" (click)="descargarPDF()">Guardar como PDF</button>
+      </div>
+      @if (descargado()) {
+        <p class="hint">Si el navegador bloqueó la descarga, revisa la barra de direcciones y permite las descargas.</p>
+      }
+    </div>
+
+    <!-- ---------------------- Síntesis revelada ---------------------- -->
+    @if (revelado()) {
+      @if (resultado(); as r) {
+        <div class="kpis">
+          <div class="kpi card"
+            [class.nota-alta]="r.notaSobre100 >= 80"
+            [class.nota-media]="r.notaSobre100 >= 60 && r.notaSobre100 < 80"
+            [class.nota-baja]="r.notaSobre100 < 60">
+            <b>{{ r.notaSobre100 }}</b>
+            <span>Nota /100</span>
+          </div>
+          <div class="kpi card">
+            <b>{{ r.notaSobre20 }}</b>
+            <span>Nota /20</span>
+          </div>
+          <div class="kpi card kpi-ok">
+            <b>{{ r.aciertos }}</b>
+            <span>Aciertos</span>
+          </div>
+          <div class="kpi card kpi-bad">
+            <b>{{ r.errores }}</b>
+            <span>Errores</span>
+          </div>
+          <div class="kpi card kpi-skip">
+            <b>{{ r.sinResponder }}</b>
+            <span>Sin responder</span>
+          </div>
+        </div>
+
+        <div class="verdict card" [class.pass]="aprobado()" [class.fail]="!aprobado()">
+          {{ aprobado() ? '¡Aprobada! Buen trabajo 🎉' : 'No aprobada. ¡A repasar y volver a intentarlo!' }}
+        </div>
+
+        <div class="card breakdown">
+          <h2>Desglose de respuestas</h2>
+          <div class="list">
+            @for (p of r.preguntas; track p.exercise.id; let i = $index) {
+              <div class="row"
+                [class.ok]="p.correcta"
+                [class.skip]="!p.correcta && p.respuestaEstudiante === 'Sin responder'"
+                [class.bad]="!p.correcta && p.respuestaEstudiante !== 'Sin responder'">
+                <div class="row-head">
+                  <span class="row-num">{{ i + 1 }}</span>
+                  <span class="row-formula">{{ p.exercise.formula }}</span>
+                  <span class="row-status">
+                    @if (p.correcta) { ✓ Correcta }
+                    @else if (p.respuestaEstudiante === 'Sin responder') { — Sin responder }
+                    @else { ✗ Incorrecta }
+                  </span>
+                </div>
+                <div class="row-body">
+                  <span><b>Tu respuesta:</b> {{ p.respuestaEstudiante }}</span>
+                  <span><b>Correcta:</b> {{ p.respuestaEsperada }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    }
+
+    <div class="footer-actions">
+      <button class="btn btn-primary" (click)="nuevoExamen()">Hacer otro examen</button>
+      <a routerLink="/" class="btn btn-ghost">Volver a la teoría</a>
+    </div>
+  }
+</section>

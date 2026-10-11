@@ -1,0 +1,122 @@
+<section class="page">
+  <header class="lab-hero">
+    <span class="badge">Laboratorio interactivo</span>
+    <h1>Laboratorio de tablas de verdad</h1>
+    <p class="lead">
+      Escribe una fórmula (o tócala con las teclas) y observa al instante su tabla de verdad,
+      <strong>paso a paso</strong> y explicada en palabras simples.
+    </p>
+  </header>
+
+  <div class="card howto">
+    <h2>Cómo usarlo</h2>
+    <ol>
+      <li>Escribe o arma una fórmula con las teclas. Usa <code>p</code>, <code>q</code>, <code>r</code>, <code>s</code> como proposiciones.</li>
+      <li>La tabla se actualiza sola. Cada columna intermedia es <strong>un paso</strong> del cálculo.</li>
+      <li>La última columna resaltada es el <strong>resultado final</strong>: <span class="val-v">V</span> = verdadero, <span class="val-f">F</span> = falso.</li>
+    </ol>
+  </div>
+
+  <div class="card editor">
+    <label class="editor-label" for="formula">Fórmula</label>
+    <input
+      id="formula"
+      #entrada
+      class="formula-input"
+      type="text"
+      [value]="formula()"
+      (input)="onInput($event)"
+      placeholder="Ej: (p ∧ q) → r"
+      spellcheck="false"
+      autocomplete="off"
+    />
+
+    <div class="keys">
+      @for (t of teclas; track t.texto) {
+        <button
+          type="button"
+          class="key"
+          [class.key-op]="t.tipo === 'op'"
+          [class.key-paren]="t.tipo === 'paren'"
+          (click)="onClickTecla(t)"
+        >{{ t.texto }}</button>
+      }
+      <button type="button" class="key key-accion" (click)="borrarUno()">⌫ Borrar</button>
+      <button type="button" class="key key-accion" (click)="limpiar()">Limpiar</button>
+    </div>
+
+    <div class="ejemplos">
+      <span class="ejemplos-label">Ejemplos rápidos:</span>
+      @for (e of ejemplos; track e.formula) {
+        <button type="button" class="chip-ejemplo" (click)="usarEjemplo(e.formula)">{{ e.etiqueta }}</button>
+      }
+    </div>
+  </div>
+
+  @if (resultado(); as r) {
+    @if (!r.ok) {
+      <div class="card error-card">
+        <h2>No pude leer la fórmula</h2>
+        <p>{{ r.mensaje }}</p>
+        <p class="error-hint">Revisa los paréntesis y los operadores. Ejemplo válido: <code>(p ∧ q) → r</code></p>
+      </div>
+    } @else {
+      <div class="card result-card">
+        <div class="result-head">
+          <h2>Tabla de verdad</h2>
+          <span class="filas-info">{{ r.rows.length }} filas por {{ r.variables.length }} variable(s)</span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="lab-table">
+            <thead>
+              <tr>
+                @for (v of r.variables; track v) { <th class="col-var">{{ v }}</th> }
+                @for (c of r.columns; track c.label) {
+                  <th [class.col-final]="c.esFinal">{{ c.label }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (fila of r.rows; track $index) {
+                <tr>
+                  @for (val of fila.asignacion; track $index) {
+                    <td class="col-var">{{ vf(val) }}</td>
+                  }
+                  @for (val of fila.valores; track $index) {
+                    <td
+                      [class.col-final]="r.columns[$index].esFinal"
+                      [class.val-v]="val"
+                      [class.val-f]="!val"
+                    >{{ vf(val) }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="legend">
+          <span class="legend-item"><span class="dot val-v">V</span> Verdadero</span>
+          <span class="legend-item"><span class="dot val-f">F</span> Falso</span>
+          <span class="legend-item"><span class="dot dot-final"></span> Columna final (resultado)</span>
+        </div>
+      </div>
+
+      <div
+        class="card clasif-card"
+        [class.clasif-tautologia]="r.clasif === 'tautologia'"
+        [class.clasif-contradiccion]="r.clasif === 'contradiccion'"
+        [class.clasif-contingencia]="r.clasif === 'contingencia'"
+      >
+        <h2>{{ clasifTexto[r.clasif].titulo }}</h2>
+        <p>{{ clasifTexto[r.clasif].detalle }}</p>
+      </div>
+    }
+  }
+
+  <div class="cta-row">
+    <a routerLink="/unidad/2" class="btn btn-ghost">Repasar la teoría (Unidad II)</a>
+    <a routerLink="/examen" class="btn btn-primary">Ponerme a prueba</a>
+  </div>
+</section>

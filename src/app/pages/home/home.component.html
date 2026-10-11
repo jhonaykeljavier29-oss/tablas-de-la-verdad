@@ -1,0 +1,41 @@
+<section class="page">
+  <header class="hero">
+    <span class="badge">Fundamentos de Lógica · Lógica Computacional</span>
+    <h1>Domina la Lógica proposicional, categórica y las falacias</h1>
+    <p class="lead">
+      Material interactivo basado en el programa de <strong>Fundamentos de Lógica</strong>.
+      Aprende con teoría clara, ejemplos resueltos y ponte a prueba con un banco de
+      <strong> {{ totalEjercicios }} ejercicios</strong> de los que se sortean
+      <strong>20 al azar</strong> en cada examen.
+    </p>
+    <div class="hero-actions">
+      <a routerLink="/unidad/1" class="btn btn-primary">Empezar la guía</a>
+      <a routerLink="/laboratorio" class="btn btn-ghost">🧪 Laboratorio de tablas</a>
+      <a routerLink="/examen" class="btn btn-ghost">Ir al examen</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>4</b><span>Unidades</span></div>
+      <div class="stat"><b>{{ totalEjercicios }}</b><span>Ejercicios</span></div>
+      <div class="stat"><b>20</b><span>Preguntas por examen</span></div>
+      <div class="stat"><b>100</b><span>Puntos</span></div>
+    </div>
+  </header>
+
+  <h2 class="section-title">Contenido por unidades</h2>
+
+  <div class="units-grid">
+    @for (u of unidades; track u.id) {
+      <a class="unit-card card" routerLink="/unidad/{{ u.id }}" [style.--unit-color]="u.color">
+        <div class="unit-icon">{{ u.icono }}</div>
+        <span class="unit-num">Unidad {{ u.id }}</span>
+        <h3>{{ u.titulo }}</h3>
+        <p class="unit-sub">{{ u.subtitulo }}</p>
+        <ul class="unit-temas">
+          @for (t of u.temas; track t) { <li>{{ t }}</li> }
+        </ul>
+        <span class="unit-cta">Ver unidad →</span>
+      </a>
+    }
+  </div>
+</section>

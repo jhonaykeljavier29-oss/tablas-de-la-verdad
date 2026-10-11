@@ -1,0 +1,223 @@
+<section class="unit-content" style="--unit-color: #22d3ee">
+  <header class="unit-hero">
+    <span class="unit-badge">Unidad I</span>
+    <h1>Fundamentos de Lógica</h1>
+    <p>
+      Antes de calcular tablas de verdad hay que entender <strong>qué es la lógica</strong>,
+      qué son las proposiciones y los argumentos, y cómo el lenguaje puede volverse
+      ambiguo. Esta unidad es la base de todo.
+    </p>
+  </header>
+
+  <!-- 1. Introducción -->
+  <article class="u-section">
+    <h2>1. Introducción a la lógica</h2>
+
+    <h3>1.1. Definición y propósito</h3>
+    <p>
+      La palabra <em>lógica</em> proviene del griego <strong>logos</strong>, que significa
+      <strong>palabra, discurso y razón</strong>. La lógica es el fundamento del razonamiento
+      racional: estructura el pensamiento de forma coherente para tomar decisiones incluso ante
+      información ambigua o contradictoria.
+    </p>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Organización coherente</h4>
+        <p>Disposición ordenada de ideas y premisas.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Sistematización</h4>
+        <p>Construcción de argumentos sólidos y razonados.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Claridad formal</h4>
+        <p>Evita ambigüedades y falacias.</p>
+      </div>
+    </div>
+    <div class="callout">
+      La lógica aporta <strong>validez</strong> (consecuencia lógica, reglas de inferencia y
+      ausencia de contradicción), <strong>optimización de recursos</strong> (análisis crítico,
+      toma de decisiones y gestión de proyectos) y <strong>ética y sostenibilidad</strong>
+      (responsabilidad profesional e impacto social).
+    </div>
+
+    <h3>1.2. Lógica formal e informal</h3>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Lógica formal (o dialéctica)</h4>
+        <p>
+          Estudia las <strong>formas</strong> del pensamiento y la estructura de los argumentos,
+          independientemente de su contenido, mediante simbolización.
+        </p>
+        <div class="formula-block">P → Q , P&nbsp;&nbsp;∴&nbsp;&nbsp;Q</div>
+      </div>
+      <div class="mini-card">
+        <h4>Lógica informal</h4>
+        <p>
+          Analiza el lenguaje cotidiano y profesional, identifica puntos de vista y detecta
+          <strong>falacias</strong> (errores de razonamiento) mediante análisis crítico.
+        </p>
+      </div>
+    </div>
+
+    <h3>Principios supremos de la lógica</h3>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Identidad</h4>
+        <p>Todo objeto es idéntico a sí mismo.</p>
+        <div class="formula-block">A = A</div>
+      </div>
+      <div class="mini-card">
+        <h4>No-contradicción</h4>
+        <p>Es imposible que algo sea y no sea al mismo tiempo.</p>
+        <div class="formula-block">¬(A ∧ ¬A)</div>
+      </div>
+      <div class="mini-card">
+        <h4>Tercio excluido</h4>
+        <p>Algo es o no es; no hay término medio.</p>
+        <div class="formula-block">A ∨ ¬A</div>
+      </div>
+      <div class="mini-card">
+        <h4>Razón suficiente</h4>
+        <p>Todo juicio requiere un fundamento que lo justifique.</p>
+      </div>
+    </div>
+
+    <h3>1.3. Importancia de la lógica en la ingeniería</h3>
+    <ul class="kv-list">
+      <li><strong>Diseño de algoritmos:</strong> secuencias de pasos lógicos para software y máquinas.</li>
+      <li><strong>Comunicación técnica:</strong> argumentación sólida con validez racional.</li>
+      <li><strong>Modelado de sistemas:</strong> modelos formales y diagramas precisos.</li>
+      <li><strong>Análisis y resolución de problemas:</strong> identificar, formular y solucionar.</li>
+      <li><strong>Simulación y optimización:</strong> simular comportamiento y optimizar procesos.</li>
+    </ul>
+  </article>
+
+  <!-- 2. Conceptos básicos -->
+  <article class="u-section">
+    <h2>2. Conceptos básicos</h2>
+
+    <h3>2.1. Proposiciones, enunciados y juicios</h3>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Concepto</h4>
+        <p>Unidad fundamental del pensamiento: representación abstracta de un objeto o idea.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Juicio</h4>
+        <p>Acto mental que afirma o niega una relación entre conceptos. Es un proceso interno, un estado de creencia.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Proposición</h4>
+        <p>Significado lógico del juicio. <strong>Es el portador de valor de verdad</strong> (verdadero o falso).</p>
+      </div>
+      <div class="mini-card">
+        <h4>Enunciado</h4>
+        <p>Expresión lingüística física: la oración que manifiesta materialmente una proposición.</p>
+      </div>
+    </div>
+
+    <h3>2.2. Argumentos: premisas y conclusión</h3>
+    <p>
+      Un argumento está formado por <strong>premisas</strong> (razones o puntos de partida) y una
+      <strong>conclusión</strong> que se deriva de ellas.
+    </p>
+    <div class="callout tip">
+      <strong>Ejemplo técnico.</strong><br />
+      Premisa 1: Si el voltaje supera los 220 V, el fusible se quema.<br />
+      Premisa 2: El voltaje medido es de 230 V.<br />
+      <strong>Conclusión:</strong> por lo tanto, el fusible se quemará.
+    </div>
+
+    <h3>2.3. Validez y solidez</h3>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Validez (forma)</h4>
+        <p>Depende de la estructura lógica. Un argumento es válido si la conclusión se deriva de las premisas, sin importar su verdad fáctica.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Solidez (contenido + forma)</h4>
+        <p>Es sólido si es <strong>válido</strong> y además todas sus premisas son <strong>realmente verdaderas</strong>.</p>
+      </div>
+    </div>
+
+    <h3>2.4. Verdad y falsedad</h3>
+    <ul class="kv-list">
+      <li>Las <strong>proposiciones</strong> son <strong>verdaderas o falsas</strong>.</li>
+      <li>Los <strong>argumentos</strong> son <strong>válidos o inválidos</strong>.</li>
+      <li>
+        <strong>Falacia de afirmación del consecuente:</strong> la conclusión no se deriva
+        necesariamente, aunque parezca relacionada.
+      </li>
+    </ul>
+  </article>
+
+  <!-- 3. Lenguaje y lógica -->
+  <article class="u-section">
+    <h2>3. Lenguaje y lógica</h2>
+    <p>
+      El lenguaje es el vehículo del pensamiento; su naturaleza orgánica introduce ambigüedad y
+      vaguedad que la lógica formal busca neutralizar.
+    </p>
+
+    <h3>3.1. Funciones del lenguaje</h3>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Informativa</h4>
+        <p>Transmite hechos, evaluables como V o F.</p>
+        <p><em>"El servidor opera con 15 ms."</em></p>
+      </div>
+      <div class="mini-card">
+        <h4>Expresiva</h4>
+        <p>Manifiesta emociones o actitudes; no es estrictamente lógica.</p>
+        <p><em>"¡Es una excelente oportunidad!"</em></p>
+      </div>
+      <div class="mini-card">
+        <h4>Directiva</h4>
+        <p>Origina acción o modifica la realidad.</p>
+        <p><em>"Reinicie el controlador."</em></p>
+      </div>
+    </div>
+
+    <h3>3.2. Tipos de definiciones</h3>
+    <div class="chips">
+      <span class="chip">Estipulativa · crea un significado nuevo</span>
+      <span class="chip">Léxica · uso común (diccionario)</span>
+      <span class="chip">Aclaratoria · precisa un término vago</span>
+      <span class="chip">Teórica · basada en una teoría aceptada</span>
+    </div>
+
+    <h3>3.3. Ambigüedad y vaguedad</h3>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Ambigüedad</h4>
+        <p>Una frase con múltiples significados que causa interpretaciones opuestas.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Vaguedad</h4>
+        <p>Significado impreciso, sin límites claros. Ej: decir "rápido" sin una métrica de tiempo.</p>
+      </div>
+    </div>
+
+    <h3>3.4. Semiótica y lógica simbólica</h3>
+    <div class="grid-cards">
+      <div class="mini-card">
+        <h4>Sintaxis</h4>
+        <p>Relación de los signos entre sí.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Semántica</h4>
+        <p>Relación signo–objeto y condiciones de verdad.</p>
+      </div>
+      <div class="mini-card">
+        <h4>Pragmática</h4>
+        <p>Relación signo–usuario y contexto de uso.</p>
+      </div>
+    </div>
+  </article>
+
+  <div class="cta-row">
+    <a routerLink="/examen" class="btn btn-primary">Poner a prueba esta unidad</a>
+    <a routerLink="/unidad/2" class="btn btn-ghost">Ir a la Unidad II →</a>
+  </div>
+</section>

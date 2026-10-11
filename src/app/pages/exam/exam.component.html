@@ -1,0 +1,171 @@
+<section class="page">
+  @if (!enCurso()) {
+    <!-- ----------------------- Pantalla de inicio ----------------------- -->
+    <div class="card start-card">
+      <span class="badge">Evaluación</span>
+      <h1>Examen de Tablas de la Verdad</h1>
+      <p class="lead">
+        Se seleccionarán <strong>20 preguntas al azar</strong> del banco de ejercicios.
+        Cada pregunta vale 1 punto: la nota final se calcula sobre 100 y sobre 20.
+      </p>
+      <ul class="rules">
+        <li>Tipos de pregunta: completar tablas, hallar valores de verdad, identificar el operador principal y clasificar proposiciones.</li>
+        <li>Puedes navegar libremente entre las preguntas antes de finalizar.</li>
+        <li>Al terminar, la nota se procesa de forma segura y <strong>sólo</strong> se revela en el archivo descargable.</li>
+      </ul>
+      <div class="start-actions">
+        <button class="btn btn-primary" (click)="iniciar()">Iniciar Examen</button>
+        <a routerLink="/laboratorio" class="btn btn-ghost">Practicar en el laboratorio</a>
+        <a routerLink="/" class="btn btn-ghost">Repasar la teoría</a>
+      </div>
+    </div>
+  } @else {
+    <!-- ------------------------- Examen en curso ------------------------ -->
+    <header class="exam-bar card">
+      <div class="bar-info">
+        <span class="bar-label">Pregunta {{ indice() + 1 }} de {{ total() }}</span>
+        <span class="bar-progress">{{ respondidas() }}/{{ total() }} respondidas</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" [style.width.%]="(respondidas() / total()) * 100"></div>
+      </div>
+      <button class="btn btn-danger btn-sm" (click)="abandonar()">Salir</button>
+    </header>
+
+    <!-- Navegador de preguntas -->
+    <nav class="navigator" aria-label="Navegador de preguntas">
+      @for (p of preguntas(); track p.id; let i = $index) {
+        <button
+          class="nav-dot"
+          [class.activa]="i === indice()"
+          [class.respondida]="esRespondida(i)"
+          (click)="ir(i)"
+          [attr.aria-label]="'Ir a la pregunta ' + (i + 1)"
+        >
+          {{ i + 1 }}
+        </button>
+      }
+    </nav>
+
+    @if (preguntaActual(); as ex) {
+      <article class="card question-card">
+        <div class="q-head">
+          <div class="q-tags">
+            <span class="tag tag-tipo">{{ etiquetaTipo(ex) }}</span>
+            <span class="tag tag-unidad">U{{ ex.unidad }}</span>
+            <span class="tag tag-nivel" [class.n1]="ex.nivel === 1" [class.n2]="ex.nivel === 2" [class.n3]="ex.nivel === 3">
+              {{ etiquetaNivel(ex.nivel) }}
+            </span>
+          </div>
+          @if (ex.formula) { <span class="q-formula">{{ ex.formula }}</span> }
+        </div>
+
+        <p class="q-enunciado">{{ ex.enunciado }}</p>
+
+        <!-- Premisas (reglas de inferencia / validez de argumentos) -->
+        @if (ex.premisas?.length) {
+          <div class="premisas-box">
+            <span class="premisas-label">Forma del argumento</span>
+            <ul class="premisas-list">
+              @for (p of ex.premisas; track p) { <li>{{ p }}</li> }
+            </ul>
+            @if (ex.formula) {
+              <div class="premisas-conclusion">∴ {{ ex.formula }}</div>
+            }
+          </div>
+        }
+
+        <!-- ============ Tabla de verdad ============ -->
+        @if (ex.tipo === 'tabla') {
+          <div class="table-wrap">
+            <table class="truth-table">
+              <thead>
+                <tr>
+                  @for (v of ex.variables; track v) { <th class="col-var">{{ v }}</th> }
+                  <th class="col-res">Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of ex.filas; track $index; let f = $index) {
+                  <tr>
+                    @for (val of fila.asignacion; track $index) {
+                      <td class="col-var">{{ val ? 'V' : 'F' }}</td>
+                    }
+                    <td class="col-res">
+                      <div class="vf-group">
+                        <button
+                          class="vf v"
+                          [class.sel]="valorCelda(indice(), f) === true"
+                          (click)="toggleCelda(indice(), f, true)"
+                        >V</button>
+                        <button
+                          class="vf f"
+                          [class.sel]="valorCelda(indice(), f) === false"
+                          (click)="toggleCelda(indice(), f, false)"
+                        >F</button>
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+
+        <!-- ============ Valor puntual ============ -->
+        @if (ex.tipo === 'valor') {
+          <div class="asignacion-box">
+            <span class="asignacion-label">Asignación:</span>
+            <span class="asignacion-val">{{ describirAsignacion(ex) }}</span>
+          </div>
+          <div class="options-row">
+            <button
+              class="opt-btn opt-true"
+              [class.sel]="valorUnico(indice()) === true"
+              (click)="marcarValor(indice(), true)"
+            >
+              <span class="opt-symbol">V</span> Verdadero
+            </button>
+            <button
+              class="opt-btn opt-false"
+              [class.sel]="valorUnico(indice()) === false"
+              (click)="marcarValor(indice(), false)"
+            >
+              <span class="opt-symbol">F</span> Falso
+            </button>
+          </div>
+        }
+
+        <!-- ============ Operador principal, clasificación, concepto, regla, validez, categórica, falacia ============ -->
+        @if (ex.tipo !== 'tabla' && ex.tipo !== 'valor') {
+          <div class="options-grid" [class.many]="(ex.opciones?.length ?? 0) > 5">
+            @for (op of ex.opciones ?? []; track op.valor) {
+              <button
+                class="opt-btn opt-generic"
+                [class.sel]="opcionMarcada(indice()) === op.valor"
+                (click)="marcarOpcion(indice(), op.valor)"
+              >
+                @if (op.sub) { <span class="opt-symbol small">{{ op.sub }}</span> }
+                <span class="opt-label">{{ op.etiqueta }}</span>
+              </button>
+            }
+          </div>
+        }
+      </article>
+
+      <!-- ---------------------------- Footer ---------------------------- -->
+      <footer class="exam-footer">
+        <button class="btn btn-ghost" (click)="anterior()" [disabled]="indice() === 0">
+          ← Anterior
+        </button>
+        @if (!esUltima()) {
+          <button class="btn btn-primary" (click)="siguiente()">Siguiente →</button>
+        } @else {
+          <button class="btn btn-primary btn-finish" (click)="finalizar()">
+            Finalizar y calificar
+          </button>
+        }
+      </footer>
+    }
+  }
+</section>
