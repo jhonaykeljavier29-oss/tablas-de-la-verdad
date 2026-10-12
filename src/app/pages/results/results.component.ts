@@ -65,6 +65,14 @@ export class ResultsComponent {
     this.desbloquear('pdf');
   }
 
+  /** Genera y descarga el reporte como imagen PNG con el estilo de la página. */
+  async descargarImagen(): Promise<void> {
+    const r = this.resultado();
+    if (!r) return;
+    await this.results.descargarImagen(r);
+    this.desbloquear('png');
+  }
+
   /** Fuerza la descarga del paquete completo (TXT + JSON). */
   descargarTodo(): void {
     const r = this.resultado();

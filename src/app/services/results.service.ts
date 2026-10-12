@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ExamResult, QuestionResult } from '../core/models';
+import { calcularAlturaReporte, dibujarReporte } from './report-image';
 
 /** Descripciones legibles de los tipos de pregunta para los reportes. */
 const TIPO_LABEL: Record<string, string> = {
@@ -23,7 +24,7 @@ const UNIDAD_LABEL: Record<number, string> = {
 };
 
 /**
- * Genera y descarga los reportes del examen (TXT, JSON y PDF vía impresión).
+ * Genera y descarga los reportes del examen (TXT, JSON, PNG y PDF vía impresión).
  * El puntaje nunca se muestra en pantalla automáticamente: sólo a través de
  * la descarga, lo que dificulta las capturas rápidas o las trampas.
  */
@@ -133,6 +134,40 @@ export class ResultsService {
 
   descargarJSON(r: ExamResult): void {
     this.descargar(this.construirJSON(r), this.nombreArchivo('json'), 'application/json');
+  }
+
+  /** Genera el reporte como imagen PNG con el estilo de la página y lo descarga. */
+  async descargarImagen(r: ExamResult): Promise<void> {
+    const blob = await this.generarImagen(r);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = this.nombreArchivo('png');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  /** Renderiza el reporte en un canvas con la estética del sitio y devuelve el PNG. */
+  private generarImagen(r: ExamResult): Promise<Blob> {
+    const W = 1000;
+    const dpr = 2;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+
+    const totalH = calcularAlturaReporte(ctx, r, W);
+    canvas.width = W * dpr;
+    canvas.height = Math.ceil(totalH) * dpr;
+    ctx.scale(dpr, dpr);
+    dibujarReporte(ctx, r, W, totalH);
+
+    return new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => (blob ? resolve(blob) : reject(new Error('No se pudo generar la imagen.'))),
+        'image/png',
+      );
+    });
   }
 
   /** Abre una ventana imprimible para guardar como PDF desde el navegador. */
